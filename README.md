@@ -36,9 +36,13 @@ So due to allow complex query, I have changed the [SSP class](https://github.com
 
     $joinQuery = "FROM `{$table}` AS `c` LEFT JOIN `currency_names` AS `cn` ON (`cn`.`id` = `c`.`id_currency`)";
     $extraCondition = "`id_client`=".$ID_CLIENT_VALUE;
+    Group By Option :
+
+    You can GROUP BY your result via sending the COLUMN name in SSP::simple function.
+    $groupBy = '`c`.`id_client`'; // for multiple COLUMN '`c`.`id_client`,`c`.`other_param`' 
     
     echo json_encode(
-           SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $extraCondition, $joinQuery)
+           SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $extraCondition, $joinQuery, $groupBy)
          );
          
 
