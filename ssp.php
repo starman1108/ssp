@@ -1,29 +1,10 @@
 <?php
-
-/*
- * Helper functions for building a DataTables server-side processing SQL query
- *
- * The static functions in this class are just helper functions to help build
- * the SQL used in the DataTables demo server-side processing scripts. These
- * functions obviously do not represent all that can be done with server-side
- * processing, they are intentionally simple to show how it works. More complex
- * server-side processing operations will likely require a custom script.
- *
- * See http://datatables.net/usage/server-side for full details on the server-
- * side processing requirements of DataTables.
- *
- * @license MIT - http://datatables.net/license_mit
- *
- * Customized By emranulhadi@gmail.com | http://emranulhadi.wordpress.com/
+/**
+ * Created by PhpStorm.
+ * User: Star_man
+ * Date: 3/7/2017
+ * Time: 7:29 PM
  */
-
-
-// REMOVE THIS BLOCK - used for DataTables test environment only!
-//$file = $_SERVER['DOCUMENT_ROOT'].'/datatables/mysql.php';
-//if ( is_file( $file ) ) {
-//    include( $file );
-//}
-
 
 class SSP {
 
@@ -218,7 +199,7 @@ class SSP {
      *  @return array  Server-side processing response array
      *
      */
-    static function simple ( $request, $sql_details, $table, $primaryKey, $columns, $joinQuery = NULL, $extraWhere = '', $groupBy = '')
+    static function simple ( $request, $sql_details, $table, $primaryKey, $columns, $extraWhere = '', $joinQuery = NULL, $groupBy = '')
     {
         $bindings = array();
         $db = SSP::sql_connect( $sql_details );
@@ -264,7 +245,7 @@ class SSP {
         $recordsFiltered = $resFilterLength[0][0];
 
          // Total data set length
-        $count_request = "SELECT COUNT(`{$primaryKey}`)";
+        $count_request = "SELECT COUNT({$primaryKey})";
         if($joinQuery){
           $count_request .= $joinQuery;
         } else {
@@ -419,7 +400,7 @@ class SSP {
         $out = array();
 
         for ( $i=0, $len=count($a) ; $i<$len ; $i++ ) {
-            $out[] = ($isJoin && isset($a[$i]['as'])) ? $a[$i][$prop]. ' AS '.$a[$i]['as'] : $a[$i][$prop];
+            $out[] = ($isJoin && isset($a[$i]['field'])) ? $a[$i][$prop]. ' AS '.$a[$i]['field'] : $a[$i][$prop];
         }
 
         return $out;
