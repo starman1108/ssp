@@ -101,7 +101,8 @@ class SSP {
                 }
             }
 
-            $order = 'ORDER BY '.implode(', ', $orderBy);
+	    if (count($orderBy) > 0)
+            	$order = 'ORDER BY '.implode(', ', $orderBy);
         }
 
         return $order;
